@@ -1,0 +1,13 @@
+ <p-menubar [model]="items">
+    <ng-template pTemplate="start">
+        <button routerLink = 'home'>
+            <img src="assets/images/logo.jpg" height="60" class="p-mr-2" >
+        </button>
+    </ng-template>
+    <ng-template pTemplate="end">
+        Buscar: <input type="text" pInputText placeholder="Search">
+        Login: <button *ngIf = '!logueado'  pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-success" routerLink = "login" ></button> <!--showDialog borrar y agregar routerLink = "login"-->
+        <button *ngIf = 'logueado' pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-warning" click ="cerrarSesion()" ></button>
+    </ng-template>
+    
+</p-menubar>

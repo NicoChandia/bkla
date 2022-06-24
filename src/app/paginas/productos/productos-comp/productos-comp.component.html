@@ -1,0 +1,157 @@
+<div aling ="right">
+    <button pButton pRipple type="button" icon="pi pi-plus" (click)="showDialog()" class="p-button-rounded p-button-success" ></button>
+</div>
+
+
+    <form [formGroup]="formularioProducto">
+        <p-dialog header="Edite Formulario" [(visible)]="display">
+            <label>
+                Producto: <input type="text" formControlName='producto'>
+            </label>
+                <br>
+                <br>
+            <label >
+                Precio $: <input type="number" formControlName='precio'>
+            </label>
+                <br>
+                <br>
+            <label >
+                Descripcion: <input type="text" formControlName='descripcion'>
+            </label>
+                <br>
+                <br>
+            <label >
+                <p-fileUpload name="demo[]"  (change)= "obtenerFile($event)"   accept="image/*"  (onUpload)="($event)"></p-fileUpload>
+                <!--Imagen: <input type="text" formControlName='url'>-->
+                
+            </label>
+                <br>
+                <br> <!--No logro que el boton se cierre despues de que le das guardar-->
+                <p-button label="Guardar" icon="pi pi-check" (click)="guardarProducto()" ></p-button>
+        
+        </p-dialog>
+    </form>
+
+
+    <div style="width:90%;  margin: 0 auto;" *ngFor = 'let p of productos'> <!--padding??-->
+        <mat-grid-list cols="3" rowHeight="1:2">
+            
+            <mat-grid-tile>
+                <p-card header="Advanced Card" subheader="Card Subheader" [style]="{width: '360px'}" styleClass="p-card-shadow">
+                    <ng-template pTemplate="header">
+                        <img alt="Card" [src] = p.url style="height: 360px">
+                    </ng-template>
+                    <h2>{{p.producto}}</h2><br>
+                    <span>${{p.precio}}</span>
+                    <p>{{p.descripcion}}</p>
+                    <ng-template pTemplate="footer">
+                        <p-button label="Comprar" icon="pi pi-shopping-cart"></p-button>
+                        <p-button  icon="pi pi-trash" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}" (click)='eliminarProducto(p.id)'></p-button>
+                        <p-button  icon="pi pi-pencil" (click)="showDialog()" styleClass="p-button-help" [style]="{'margin-left': '.5em'}"></p-button>
+                    </ng-template>
+                </p-card>
+            </mat-grid-tile>
+            <!--
+            <mat-grid-tile>
+                <p-card header="Advanced Card" subheader="Card Subheader" [style]="{width: '360px', height: '5 px'}" styleClass="p-card-shadow">
+                    <ng-template pTemplate="header">
+                        <img alt="Card" src="assets/images/remeras/remera1.jpg" style="height: 360px">
+                    </ng-template>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
+                    <ng-template pTemplate="footer">
+                        <p-button label="Comprar" icon="pi pi-shopping-cart"></p-button>
+                        <p-button  icon="pi pi-trash" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
+                        <p-button  icon="pi pi-pencil" (click)="showDialog()" styleClass="p-button-help" [style]="{'margin-left': '.5em'}"></p-button>
+                    </ng-template>
+                </p-card>
+            </mat-grid-tile>
+
+            <mat-grid-tile> 
+                <p-card header="Advanced Card" subheader="Card Subheader" [style]="{width: '360px'}" styleClass="p-card-shadow">
+                    <ng-template pTemplate="header">
+                        <img alt="Card" src="assets/images/remeras/remera2.jpg" style="height: 360px">
+                    </ng-template>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
+                    <ng-template pTemplate="footer">
+                        <p-button label="Comprar" icon="pi pi-shopping-cart"></p-button>
+                        <p-button  icon="pi pi-trash" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
+                        <p-button  icon="pi pi-pencil" (click)="showDialog()" styleClass="p-button-help" [style]="{'margin-left': '.5em'}"></p-button>
+                    </ng-template>
+                </p-card>
+            </mat-grid-tile> 
+
+            <mat-grid-tile>
+                <p-card header="Advanced Card" subheader="Card Subheader" [style]="{width: '360px'}" styleClass="p-card-shadow">
+                    <ng-template pTemplate="header">
+                        <img alt="Card" src="assets/images/remeras/remera3.jpg" style="height: 360px">
+                    </ng-template>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
+                    <ng-template pTemplate="footer">
+                        <p-button label="Comprar" icon="pi pi-shopping-cart"></p-button>
+                        <p-button  icon="pi pi-trash" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
+                        <p-button  icon="pi pi-pencil" (click)="showDialog()" styleClass="p-button-help" [style]="{'margin-left': '.5em'}"></p-button>
+                    </ng-template>
+                </p-card>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <p-card header="Advanced Card" subheader="Card Subheader" [style]="{width: '360px'}" styleClass="p-card-shadow">
+                    <ng-template pTemplate="header">
+                        <img alt="Card" [src] = productos[1].url style="height: 360px">
+                    </ng-template>
+                    <h2>{{productos[1].producto}}</h2><br>
+                    <span>${{productos[1].precio}}</span>
+                    <p>{{productos[1].descripcion}}</p>
+                    <ng-template pTemplate="footer">
+                        <p-button label="Comprar" icon="pi pi-shopping-cart"></p-button>
+                        <p-button  icon="pi pi-trash" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
+                        <p-button  icon="pi pi-pencil" (click)="showDialog()" styleClass="p-button-help" [style]="{'margin-left': '.5em'}"></p-button>
+                    </ng-template>
+                </p-card>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <p-card header="Advanced Card" subheader="Card Subheader" [style]="{width: '360px'}" styleClass="p-card-shadow">
+                    <ng-template pTemplate="header">
+                        <img alt="Card" src="assets/images/remeras/remera5.jpg" style="height: 360px">
+                    </ng-template>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
+                    <ng-template pTemplate="footer">
+                        <p-button label="Comprar" icon="pi pi-shopping-cart"></p-button>
+                        <p-button  icon="pi pi-trash" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
+                        <p-button  icon="pi pi-pencil" (click)="showDialog()" styleClass="p-button-help" [style]="{'margin-left': '.5em'}"></p-button>
+                    </ng-template>
+                </p-card>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <p-card header="Advanced Card" subheader="Card Subheader" [style]="{width: '360px'}" styleClass="p-card-shadow">
+                    <ng-template pTemplate="header">
+                        <img alt="Card" [src] = productos[0].url style="height: 360px">
+                    </ng-template>
+                    <h2>{{productos[0].producto}}</h2><br>
+                    <span>${{productos[0].precio}}</span>
+                    <p>{{productos[0].descripcion}}</p>
+                    <ng-template pTemplate="footer">
+                        <p-button label="Comprar" icon="pi pi-shopping-cart"></p-button>
+                        <p-button  icon="pi pi-trash" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
+                        <p-button  icon="pi pi-pencil" (click)="showDialog()" styleClass="p-button-help" [style]="{'margin-left': '.5em'}"></p-button>
+                    </ng-template>
+                </p-card>
+            </mat-grid-tile>
+            -->
+          </mat-grid-list>
+    </div>
+
+
+
+   
+        
+
+
+
+    

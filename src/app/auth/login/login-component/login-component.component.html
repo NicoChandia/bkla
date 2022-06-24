@@ -1,0 +1,23 @@
+
+<ng-container>
+    <form [formGroup]="formularioLogin">
+        <p-dialog header="Iniciar Sesión" [(visible)]="display" >  
+            <label>
+                Usuario: <input type="text" formControlName='username'>
+            </label>
+                <br>
+                <br>
+            <label >
+                Contraseña: <input type="number" formControlName='password'>
+            </label>
+             
+                <br>
+                <br> <!--No logro que el boton se cierre despues de que le das guardar-->
+                <p-button label="Guardar" icon="pi pi-check" (click)="iniciarSesion()" ></p-button>
+        
+        </p-dialog> 
+    </form>
+    
+    
+
+</ng-container>
